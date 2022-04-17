@@ -1,0 +1,166 @@
+<!-- jQuery -->
+<script src="/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FastClick -->
+<script src="/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="http://path.to/widget.js" class="2 5 4"></script>
+<script src="/vendors/nprogress/nprogress.js"></script>
+<!-- Chart.js -->
+<script src="/vendors/Chart.js/dist/Chart.min.js"></script>
+<!-- gauge.js -->
+<script src="/vendors/gauge.js/dist/gauge.min.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- iCheck -->
+<script src="/vendors/iCheck/icheck.min.js"></script>
+<!-- Skycons -->
+<script src="/vendors/skycons/skycons.js"></script>
+<!-- Flot -->
+<script src="/vendors/Flot/jquery.flot.js"></script>
+<script src="/vendors/Flot/jquery.flot.pie.js"></script>
+<script src="/vendors/Flot/jquery.flot.time.js"></script>
+<script src="/vendors/Flot/jquery.flot.stack.js"></script>
+<script src="/vendors/Flot/jquery.flot.resize.js"></script>
+<!-- Flot plugins -->
+<script src="/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+<script src="/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+<script src="/vendors/flot.curvedlines/curvedLines.js"></script>
+<!-- DateJS -->
+<script src="/vendors/DateJS/build/date.js"></script>
+<!-- JQVMap -->
+<script src="/vendors/jqvmap/dist/jquery.vmap.js"></script>
+<script src="/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+<script src="/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="/vendors/moment/min/moment.min.js"></script>
+<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="/build/js/custom.min.js"></script>
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <h1 style="text-align: center;">Details</h1>
+    <div class="x_content">
+        <br>
+        <form id="form" data-parsley-validate="" class="form-horizontal form-label-left">
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">
+                    Tên khách hàng
+                </label>
+                <div class="col-md-6 col-sm-6">
+                    <input type="text" name="name" class="form-control name" id="tenkhachhang" value="Airpods 2"
+                        placeholder="Vui lòng nhập Tên">
+                    <span class="error error_name"></span>
+                </div>
+            </div>
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="slug">
+                    Địa chỉ
+                </label>
+                <div class="col-md-6 col-sm-6">
+                    <input type="text" name="slug" class="form-control slug" id="diachi" value="Apple"
+                        placeholder="Vui lòng nhập Slug">
+                    <span class="error error_slug"></span>
+                </div>
+            </div>
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="slug">
+                    Số điện thoại
+                </label>
+                <div class="col-md-6 col-sm-6">
+                    <input type="text" name="slug" class="form-control slug" id="sodienthoai" value="Apple"
+                        placeholder="Vui lòng nhập Slug">
+                    <span class="error error_slug"></span>
+                </div>
+            </div>
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_parent">
+                    Trạng thái
+                </label>
+                <div class="col-md-6 col-sm-6">
+                    <input type="text" name="slug" class="form-control slug" id="trangthai" value="Apple"
+                        placeholder="Vui lòng nhập Slug">
+                    <span class="error error_slug"></span>
+                </div>
+            </div>
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="slug">
+                    Tổng tiền
+                </label>
+                <div class="col-md-6 col-sm-6">
+                    <input type="number" name="slug" class="form-control slug" id="tongtien" value="Apple">
+                    <span class="error error_slug"></span>
+                </div>
+            </div>
+            <ul style="margin-left: 230px;" class="products">
+
+            </ul>
+            <div class="ln_solid"></div>
+            <div class="item form-group">
+                <div class="col-md-6 col-sm-6 offset-md-3">
+                    <button onclick="update()" type="submit" class="btn btn-success">
+                        <i class="fa fa-save"></i> Lưu lại</button>
+                    <a href="admin/product/index" class="btn btn-primary">
+                        Thoát</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+<!-- end of weather widget -->
+</div>
+</div>
+</div>
+</div>
+<!-- /page content -->
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    function getDetail() {
+        $.ajax({
+            url: `http://localhost:3000/admin/orders/detail/${params.get("id")}`,
+            type: 'GET',
+            success: function (results) {
+                DOM(results)
+            }
+        });
+    }
+    function DOM(result) {
+        let tenkhachhang = document.getElementById('tenkhachhang').value = result.name
+        let diachi = document.getElementById('diachi').value = result.address
+        let sodienthoai = document.getElementById('sodienthoai').value = result.phone
+        let trangthai = document.getElementById('trangthai').value = result.status
+        let tongtien = document.getElementById('tongtien').value = result.total
+
+        let ul = document.getElementsByClassName("products");
+        for (let i = 0; i < result.products.length; i++) {
+            let li = document.createElement("li");
+            li.innerHTML = result.products[i].name
+            ul[0].append(li)
+        }
+
+    }
+    function update() {
+        let _product = {
+            name: document.getElementById('tenkhachhang').value,
+            address: document.getElementById('diachi').value,
+            phone: document.getElementById('sodienthoai').value,
+            status: document.getElementById('trangthai').value,
+            total: document.getElementById('tongtien').value,
+        }
+        $.ajax({
+            url: `http://localhost:3000/admin/orders/update/${params.get("id")}`,
+            data: _product,
+            type: 'PUT',
+            success: function (results) {
+                // DOM(results)
+                window.location.reload();
+            }
+        });
+    }
+    getDetail();
+</script>

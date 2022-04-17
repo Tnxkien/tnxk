@@ -1,0 +1,223 @@
+<p-toast></p-toast>
+<header class="header_section">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg custom_nav-container ">
+      <a class="navbar-brand" href="index.html">
+        <span>
+          Timups
+        </span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class=""> </span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/">Trang chủ<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+
+            <div class="dropdown">
+              <a class="nav-link"> sản phẩm </a>
+              <div class="dropdown-content">
+                <a [href]="['/products/iPhone']" style="width: 400px;"> iPhone </a>
+                <br>
+                <a [href]="['/products/samsung']" style="width: 400px;"> samsung </a>
+                <br>
+                <a [href]="['/products/oppo']" style="width: 400px;"> oppo </a>
+                <br>
+                <a [href]="['/products/nokia']" style="width: 400px;"> nokia </a>
+                <br>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/other"> Phụ kiện khác </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/about"> Chúng tôi </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/contact">Liên hệ</a>
+          </li>
+        </ul>
+        <div class="user_option-box">
+          <a *ngIf="user">{{ user.username }}</a>
+          <div *ngIf="!user">
+            <a (click)="showDialog()">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </a>
+            <a (click)="showDialogRegister()">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+            </a>
+          </div>
+          <a *ngIf="user" (click)="openCart()">
+            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+          </a>
+          <a>
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </a>
+
+          <a *ngIf="user">
+            <i (click)="logOut()" class="fa fa-sign-out" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- shop section -->
+<router-outlet></router-outlet>
+<!-- footer section -->
+<footer class="footer_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-3 footer-col">
+        <div class="footer_detail">
+          <h4>
+            Về Chúng Tôi
+          </h4>
+          <p>
+           Chúng Tôi Có Nhiều Cách Liên Lạc
+          </p>
+          <div class="footer_social">
+            <a href="https://www.facebook.com/tnxkien292/ ">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.livescore.com/en/">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.youtube.com/">
+              <i class="fa fa-youtube" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.instagram.com/">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 footer-col">
+        <div class="footer_contact">
+          <h4>
+            Địa Chỉ
+          </h4>
+          <div class="contact_link_box">
+            <a href="">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Hutech University
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
+                Call +0111112222333
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span>
+                demo@gmail.com
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 footer-col">
+        <div class="footer_contact">
+          <h4>
+            Subscribe
+          </h4>
+          <form action="#">
+            <input type="text" placeholder="Enter email" />
+            <button  type="submit" >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 footer-col">
+        <div class="map_container">
+          <div class="map">
+            <div id="googleMap"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-info">
+    
+    </div>
+  </div>
+</footer>
+
+
+<p-dialog [draggable]="false" header="Đăng nhập" [(visible)]="displayBasic" [style]="{width: '50vw'}">
+  <form [formGroup]="profileForm" action="">
+    <input type="text" formControlName="username" placeholder="Tài khoản">
+    <input type="password" formControlName="password" placeholder="Mật khẩu">
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="login()" label="Đăng nhập" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [draggable]="false" header="Đăng ký" [(visible)]="displayBasicRegister" [style]="{width: '50vw'}">
+  <form [formGroup]="registerForm" action="">
+    <input formControlName="username" type="text" placeholder="Tài khoản">
+    <input formControlName="password" type="password" placeholder="Mật khẩu">
+    <input formControlName="email" type="text" placeholder="Email">
+    <input formControlName="phone" type="text" placeholder="Số điện thoại">
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="register()" label="Đăng ký" styleClass="p-button-text">
+    </p-button>
+  </ng-template>
+</p-dialog>
+
+<p-sidebar [(visible)]="visibleSidebar2" position="right" [style]="{width:'40em'}" [baseZIndex]="10000">
+  <a>Giỏ hàng của bạn</a>
+  <div class="body-cart">
+    <div *ngFor="let cart of Cart" class="cart-item">
+      <div class="name" >
+        <p style="float: left;">{{ cart.name }}</p>
+      </div>
+      <div class="price" >
+        <p>{{ cart.price | number}}</p>
+      </div>
+      <div class="quantity" >
+        <p>{{ cart.quantity}}</p>
+      </div>
+      <div class="total" >
+        <p>{{ cart.price * cart.quantity | number }}</p>
+      </div>
+      <div class="icon" style="margin-top: 2px;">
+        <i (click)="removeItem(cart._id)" class="pi pi-trash" style="font-size: 1rem"></i>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="Cart" style="float: right;" >
+    <p style="padding-right: 20px;" >Tổng tiền: {{ totalCart| number }}</p>
+    <p-button (click)="openPay()" label="Thanh toán" icon="pi pi-wallet" styleClass="p-button-sm"></p-button>
+  </div>
+
+  <div *ngIf="!Cart" >
+    <p style="text-align: center;" >Chưa có sản phẩm</p>
+  </div>
+</p-sidebar>
+
+<p-dialog header="Đặt hàng" [(visible)]="displayInfo" [style]="{width: '50vw'}">
+  <form [formGroup]="infoForm" >
+    <input formControlName="name" type="text" placeholder="Tên của bạn...">
+    <input formControlName="address" type="text"  placeholder="Địa chỉ...">
+    <input formControlName="phone" type="text"  placeholder="Số điện thoại">
+  </form>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="datHang()" label="Đặt hàng" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

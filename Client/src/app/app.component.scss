@@ -1,0 +1,62 @@
+a:hover{
+    cursor: pointer;
+}
+
+input[type=text], input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  a{
+      color: black;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .body-cart{
+    margin-top: 20px;
+    .cart-item{
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+  }
+
+  .name{
+    width: 35%;
+  }
+  .price{
+    width: 20%;
+  }
+  .quantity{
+    width: 10%;
+  }
+  .total{
+    width: 20%;
+  }
+  .icon{
+    width: 15%;
+  }

@@ -1,0 +1,95 @@
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>
+          <%=name_module%>
+        </h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+          <form action="">
+            <div class="input-group">
+              <input type="text" name="s" value="<%=search%>" class="form-control" placeholder="Nhập từ khóa...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Go!</button>
+              </span>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row" style="display: block;">
+
+      <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>
+              <a href="admin/<%=link_module%>/add">
+                <i class="fa fa-plus"></i> Thêm mới
+              </a>
+          
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
+                    class="fa fa-wrench"></i></a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Settings 1</a>
+                  <a class="dropdown-item" href="#">Settings 2</a>
+                </div>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="x_content">
+
+            <div class="table-responsive">
+              <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                  <tr class="headings">
+                    <th>
+                      <input type="checkbox" id="check-all" class="flat">
+                    </th>
+                    <th class="column-title">Thứ Tự </th>
+                    <th class="column-title">Tên </th>
+                    <th class="column-title">Giá Tiền </th>
+
+                  
+                    <th class="column-title">Trạng Thái </th>
+                    <th class="column-title">
+                      Chức năng
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="checkboxes">
+                  <%-array_table%>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col-sm-5">
+              
+              </div>
+              <div class="col-sm-7">
+                <%-pagination%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /page content -->

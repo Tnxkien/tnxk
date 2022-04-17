@@ -1,0 +1,45 @@
+<div class="box">
+  <a (click)="getDetailProduct(product._id)" >
+    <div class="img-box">
+      <img [src]="product.img[0]" alt="">
+    </div>
+    <div class="detail-box">
+      <h6>
+        {{product.name}}
+      </h6>
+      <h6>
+        Price:
+        <span>
+          ${{product.price | number}}
+        </span>
+      </h6>
+    </div>
+    <div class="new">
+      <span>
+        New
+      </span>
+    </div>
+  </a>
+</div>
+
+<p-dialog *ngIf="product" [draggable]="false" header="Thông tin sản phẩm" [(visible)]="displayBasic" [style]="{width: '65vw'}">
+  <p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '100%'}"
+    [numVisible]="5" [showThumbnails]="false" [showIndicators]="true" [transitionInterval]="2000">
+    <ng-template pTemplate="item" let-item>
+      <img [src]="item" style="width: 40%; display: block;" />
+    </ng-template>
+    <ng-template pTemplate="thumbnail" let-item>
+      <div class="grid grid-nogutter justify-content-center">
+        <img [src]="item" style="display: block;" />
+      </div>
+    </ng-template>
+  </p-galleria>
+  <div class="content" >
+    <p>Tên sản phẩm: {{ product.name }}</p>
+    <p>Giá sản phẩm: {{ product.price | number }}$</p>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button *ngIf="!_isLogin" icon="pi pi-shopping-cart" [disabled]="true" label="Thêm vào giỏ hàng" styleClass="p-button-text"></p-button>
+    <p-button *ngIf="_isLogin" icon="pi pi-shopping-cart" (click)="addToCart()" label="Thêm vào giỏ hàng" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

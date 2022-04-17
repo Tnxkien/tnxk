@@ -1,0 +1,186 @@
+<!-- jQuery -->
+<script src="/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FastClick -->
+<script src="/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="/vendors/nprogress/nprogress.js"></script>
+<!-- Chart.js -->
+<script src="/vendors/Chart.js/dist/Chart.min.js"></script>
+<!-- gauge.js -->
+<script src="/vendors/gauge.js/dist/gauge.min.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- iCheck -->
+<script src="/vendors/iCheck/icheck.min.js"></script>
+<!-- Skycons -->
+<script src="/vendors/skycons/skycons.js"></script>
+<!-- Flot -->
+<script src="/vendors/Flot/jquery.flot.js"></script>
+<script src="/vendors/Flot/jquery.flot.pie.js"></script>
+<script src="/vendors/Flot/jquery.flot.time.js"></script>
+<script src="/vendors/Flot/jquery.flot.stack.js"></script>
+<script src="/vendors/Flot/jquery.flot.resize.js"></script>
+<!-- Flot plugins -->
+<script src="/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+<script src="/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+<script src="/vendors/flot.curvedlines/curvedLines.js"></script>
+<!-- DateJS -->
+<script src="/vendors/DateJS/build/date.js"></script>
+<!-- JQVMap -->
+<script src="/vendors/jqvmap/dist/jquery.vmap.js"></script>
+<script src="/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+<script src="/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="/vendors/moment/min/moment.min.js"></script>
+<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="/build/js/custom.min.js"></script>
+
+<script>
+    function changeToSlug(nameid_title = 'name', nameid_slug = 'slug') {
+        var title, slug;
+
+        //Lấy text từ thẻ input title 
+        title = document.getElementById(nameid_title).value;
+
+        //Đổi chữ hoa thành chữ thường
+        slug = title.toLowerCase();
+
+        //Đổi ký tự có dấu thành không dấu
+        slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+        slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+        slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+        slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+        slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+        slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+        slug = slug.replace(/đ/gi, 'd');
+        //Xóa các ký tự đặt biệt
+        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+        //Đổi khoảng trắng thành ký tự gạch ngang
+        slug = slug.replace(/ /gi, "-");
+        //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+        //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+        slug = slug.replace(/\-\-\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-/gi, '-');
+        //Xóa các ký tự gạch ngang ở đầu và cuối
+        slug = '@' + slug + '@';
+        slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+        //In slug ra textbox có id “slug”
+        document.getElementById(nameid_slug).value = slug;
+    }
+
+    $(document).ready(function () {
+        $('#form').on('submit', function (e) {
+            // Tắt load form
+            e.preventDefault();
+
+            let _images = $('#files')[0].files
+            
+            var formData = new FormData();
+            
+            for(let i = 0; i<_images.length; i++){
+                formData.append('file', _images[i])
+            }
+
+            formData.append('name', $("#name").val())
+            formData.append('slug', $('#slug').val())
+            formData.append('content', $('.content').val())
+            formData.append('id_parent', $('#id_parent').val())
+            formData.append('price', $('#_price').val())
+            
+            $.ajax({
+                url: 'http://localhost:3000/admin/product/processForm',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (results) {
+                    if (results.kq == 1) {
+                        window.location.href = 'admin/<%=link_module%>/index';
+                    } else {
+                        console.log(results)
+                    }
+                }
+            });
+            return false;
+        })
+    });
+
+    function get_info_delete(name = '', id = '') {
+        // Gửi name vào id=text-name
+        $('#text-name').text(name);
+        // Gửi id vào id=id_delete
+        $('#id_delete').val(id);
+    }
+
+    function js_delete() {
+        // lấy id từ popup
+        var id = $('#id_delete').val();
+        // xóa hàng trên bảng
+        $('#id_delete_' + id).remove();
+
+        $.ajax({
+            url: 'admin/product/delete',
+            type: 'POST',
+            data: { id },
+            success: function (results) {
+                alert(results.msg);
+            }
+        });
+        return false;
+    }
+    function js_status(id = '') {
+        // lấy value
+        var value = $('#status_' + id).prop('checked');
+
+        $.ajax({
+            url: 'admin/product/status',
+            type: 'POST',
+            data: { id, value },
+            success: function (results) {
+                alert(results.msg)
+            }
+        });
+
+        return false;
+    }
+
+    function status_delete() {
+        var searchIDs = $("#checkboxes .multil input:checkbox:checked").map(function () {
+            return $(this).val();
+        }).get(); // <----
+
+        console.log(searchIDs);
+    }
+</script>
+
+<!-- modal delete -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">Thông báo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>Bạn có muốn xóa?</h4>
+                <p class="text-danger" id="text-name"></p>
+                <input type="hidden" id="id_delete">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="js_delete()" data-dismiss="modal">Xóa
+                    ngay</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+            </div>
+
+        </div>
+    </div>
+</div>

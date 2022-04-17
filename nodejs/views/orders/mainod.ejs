@@ -1,0 +1,194 @@
+<!-- jQuery -->
+<script src="/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FastClick -->
+<script src="/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="/vendors/nprogress/nprogress.js"></script>
+<!-- Chart.js -->
+<script src="/vendors/Chart.js/dist/Chart.min.js"></script>
+<!-- gauge.js -->
+<script src="/vendors/gauge.js/dist/gauge.min.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- iCheck -->
+<script src="/vendors/iCheck/icheck.min.js"></script>
+<!-- Skycons -->
+<script src="/vendors/skycons/skycons.js"></script>
+<!-- Flot -->
+<script src="/vendors/Flot/jquery.flot.js"></script>
+<script src="/vendors/Flot/jquery.flot.pie.js"></script>
+<script src="/vendors/Flot/jquery.flot.time.js"></script>
+<script src="/vendors/Flot/jquery.flot.stack.js"></script>
+<script src="/vendors/Flot/jquery.flot.resize.js"></script>
+<!-- Flot plugins -->
+<script src="/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+<script src="/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+<script src="/vendors/flot.curvedlines/curvedLines.js"></script>
+<!-- DateJS -->
+<script src="/vendors/DateJS/build/date.js"></script>
+<!-- JQVMap -->
+<script src="/vendors/jqvmap/dist/jquery.vmap.js"></script>
+<script src="/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+<script src="/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="/vendors/moment/min/moment.min.js"></script>
+<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="/build/js/custom.min.js"></script>
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <!-- top tiles -->
+    <div class="title_left">
+        <h3>
+          Danh Sách Đơn Hàng
+        </h3>
+      </div>
+      
+    <div>
+    <div>
+        <div class="x_panel">
+            <div class="x_title">
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Settings 1</a>
+                            <a class="dropdown-item" href="#">Settings 2</a>
+                        </div>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title">Khách hàng </th>
+                                <th class="column-title"> Địa chỉ</th>
+                                <th class="column-title"> Số lượng</th>
+                                <th class="column-title">Tổng tiền </th>
+                                <th class="column-title">Trạng thái </th>
+                                <th class="column-title">Chi Tiết </th>
+                                <th class="column-title">Xóa </th>
+                            </tr>
+                        </thead>
+                        <tbody id="checkboxes">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5">
+                     
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+                            <ul class="pagination">
+                                <li><a href="admin/product/index/1">First</a></li>
+                                <li><a href="admin/product/index/0">Previous</a></li>
+                                <li><a href="admin/product/index/2">Next</a></li>
+                                <li><a href="admin/product/index/0">Last</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End to do list -->
+
+</div>
+<!-- end of weather widget -->
+</div>
+</div>
+</div>
+</div>
+<!-- /page content -->
+
+<script>
+    function getAll() {
+        $.ajax({
+            url: 'http://localhost:3000/admin/orders/getAll',
+            type: 'GET',
+            success: function (results) {
+                DOM(results)
+            }
+        });
+    }
+    function DOM(results) {
+        var thead = document.getElementsByClassName("headings");
+        var tbody = document.getElementById("checkboxes");
+        
+        for (let i = 0; i < results.length;i++) {
+            
+            var tr = document.createElement('tr');
+
+            var td = document.createElement('td');
+            td.innerHTML = results[i].name
+            tr.appendChild(td)
+
+            var td = document.createElement('td');
+            td.innerHTML = results[i].address
+            tr.appendChild(td)
+
+            var td = document.createElement('td');
+            td.innerHTML = results[i].products.length;
+            tr.appendChild(td)
+
+            var td = document.createElement('td');
+            td.innerHTML = results[i].total;
+            tr.appendChild(td)
+            
+            var td = document.createElement('td');
+            td.innerHTML = results[i].status;
+            tr.appendChild(td)
+
+            var td = document.createElement('td');
+            var edit = document.createElement('button')
+            edit.innerHTML = "Chi tiết"
+            edit.onclick = ()=>{
+                detail(results[i]._id);
+            }
+            td.appendChild(edit);
+            tr.appendChild(td)
+
+            var td = document.createElement('td');
+            var edit = document.createElement('button')
+            edit.innerHTML = "Xóa"
+            edit.onclick = ()=>{
+                _delete(results[i]._id);
+            }
+            td.appendChild(edit);
+            tr.appendChild(td)
+        
+            tbody.appendChild(tr)
+        }
+
+    }
+
+    function detail(id){
+        location.href = `/admin/orders/edit?id=${id}`
+    }
+    function _delete(id){
+        $.ajax({
+            url: `http://localhost:3000/admin/orders/delete/${id}`,
+            type: 'DELETE',
+            success: function (results) {
+                window.location.reload();
+            }
+        });
+    }
+    getAll()
+</script>

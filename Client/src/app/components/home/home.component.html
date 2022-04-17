@@ -1,0 +1,273 @@
+<div class="hero_area">
+  <div class="hero_social">
+    <a href="https://www.facebook.com/tnxkien292/ ">
+      <i class="fa fa-facebook" aria-hidden="true"></i>
+    </a>
+    <a href="https://www.livescore.com/en/">
+      <i class="fa fa-twitter" aria-hidden="true"></i>
+    </a>
+    <a href="https://www.youtube.com/">
+      <i class="fa fa-youtube" aria-hidden="true"></i>
+    </a>
+    <a href="https://www.instagram.com/">
+      <i class="fa fa-instagram" aria-hidden="true"></i>
+    </a>
+  </div>
+  <section class="slider_section ">
+    <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="container-fluid ">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="detail-box">
+                  <h1>
+                    BÁNH NẬM
+                  </h1>
+                  <p>
+                    Chào Mừng Các Bạn Đến Với Chúng Tôi. Nơi Bán Ốp Lưng và Phụ Kiện Số 1 Việt Nam!!!
+                  </p>
+                  <div class="btn-box">
+                 
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="img-box">
+                  <img src="../assets/images/slider-img.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+      <ol class="carousel-indicators">
+        <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+        <li data-target="#customCarousel1" data-slide-to="1"></li>
+        <li data-target="#customCarousel1" data-slide-to="2"></li>
+      </ol>
+    </div>
+  </section>
+  <!-- end slider section -->
+</div>
+<section class="shop_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Các Sản Phẩm
+      </h2>
+    </div>
+    <div class="row">
+      <div *ngFor="let product of products" class="col-sm-6 col-xl-3">
+        <app-item [product]="product" ></app-item> 
+      </div>
+    </div>
+     
+    <div class="btn-box">
+      <a href="">
+        View All
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- end shop section -->
+
+<!-- about section -->
+
+<section class="about_section layout_padding">
+  <div class="container  ">
+    <div class="row">
+      <div class="col-md-6 col-lg-5 ">
+        <div class="img-box">
+          <img src="../assets/images/hn2.png" alt="">
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-7">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2>
+              Về Chúng Tôi
+            </h2>
+          </div>
+          <p>
+          Trang Web Được Tạo Nên Nhằm Mục Đích Làm Đồ Án Cuối Cấp. Trang Web được xây đựng bằng MEAN. MongoDB-Epress-Angular-Nodejs.Được xây dựng bởi 4 thành viên
+          </p>
+          <a href="../about">
+            Read More
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- end about section -->
+
+<!-- feature section -->
+
+<section class="feature_section layout_padding">
+  <div class="container">
+    <div class="heading_container">
+      <h2>
+        Đặc Điểm Sản Phẩm Của Chúng Tôi
+      </h2>
+      <p>
+        Các dòng sản phẩm chất lượng, đều được gia công và nhập có chọn lọc.
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <div class="img-box">
+            <img src="../assets/images/f1.png" alt="">
+          </div>
+          <div class="detail-box">
+            <h5>
+              An Toàn
+            </h5>
+            <p>
+              Các sản phẩm đều chính hãng và sử dụng nguyên liệu được kiểm định.
+            </p>
+            <a href="">
+              <span>
+              </span>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <div class="img-box">
+            <img src="../assets/images/f2.png" alt="">
+          </div>
+          <div class="detail-box">
+            <h5>
+              Độc Quyền
+            </h5>
+            <p>
+              Sản phẩm của chúng tôi do chúng tôi tự phát triền.
+            </p>
+            <a href="">
+              <span>
+               
+              </span>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <div class="img-box">
+            <img src="../assets/images/f3.png" alt="">
+          </div>
+          <div class="detail-box">
+            <h5>
+              Cam Kết
+            </h5>
+            <p>
+              Giá rẻ, bảo hành trọn đời, phụ vụ tận nơi, giao hàng tận tay.
+            </p>
+            <a href="">
+          
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <div class="img-box">
+            <img src="../assets/images/f4.png" alt="">
+          </div>
+          <div class="detail-box">
+            <h5>
+              Hướng Tới
+            </h5>
+            <p>
+              Sản phẩm chất lượng, giá cả phải chăng, chúng tôi hướng tới mọi khách hàng dễ tính nhất.
+            </p>
+            <a href="">
+              <span>
+          
+              </span>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-box">
+      <a href="">
+        View More
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- end feature section -->
+
+<!-- contact section -->
+
+<section class="contact_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form_container">
+          <div class="heading_container">
+            <h2>
+              Contact Us
+            </h2>
+          </div>
+          <form action="">
+            <div>
+              <input type="text" placeholder="Full Name " />
+            </div>
+            <div>
+              <input type="email" placeholder="Email" />
+            </div>
+            <div>
+              <input type="text" placeholder="Phone number" />
+            </div>
+            <div>
+              <input type="text" class="message-box" placeholder="Message" />
+            </div>
+            <div class="d-flex ">
+              <button>
+                SEND
+                
+              </button>
+           
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="img-box">
+          <img src="../assets/images/contact-img.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- end contact section -->
+
+<!-- client section -->
+<section class="client_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Thông Tin Về Chúng Tôi
+      </h2>
+    </div>
+   
+
+      </div>
+    
+  
+</section>
+<!-- end client section -->
